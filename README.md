@@ -80,6 +80,36 @@ Schedadnd è un progetto web sviluppato in PHP che permette di:
 - ✅ Interfaccia responsive
 - ✅ Validazione dati lato client
 
+## 🙏 Crediti e Riconoscimenti
+
+### Template HTML/CSS Originale
+La struttura HTML e gli stili CSS per le schede personaggio sono basati sul lavoro di:
+- **Autore**: Brandon Fulljames
+- **Fonte**: [D&D 5e Character Sheet](https://codepen.io/evertras/full/YVVeMd/)
+- **Piattaforma**: CodePen
+- **Licenza**: Utilizzato e adattato con riconoscimento
+
+### Modifiche e Adattamenti
+Il template originale è stato adattato e esteso per questo progetto con:
+- ✅ Integrazione con backend PHP
+- ✅ Sistema di rendering dinamico
+- ✅ Supporto per schede incantatori
+- ✅ Localizzazione in italiano
+- ✅ Ottimizzazioni per la stampa
+- ✅ Gestione dati tramite JSON
+
+### Componenti Sviluppati
+I seguenti componenti sono stati sviluppati specificamente per questo progetto:
+- Sistema di classi PHP (Character, Spellcaster, Renderer)
+- Template PHP dinamici
+- Gestione JSON per input dati
+- Scheda incantesimi personalizzata
+- Script JavaScript per funzionalità aggiuntive
+
+---
+
+**Ringraziamo [Brandon Fulljames](https://codepen.io/evertras) per aver condiviso il suo eccellente lavoro sulla scheda D&D, che ha fornito una solida base per questo progetto.**
+
 ## Contributi
 
 I contributi sono benvenuti! Per contribuire:
