@@ -1,0 +1,852 @@
+/* CSS ottimizzato per stampa A4 con traduzioni italiane */
+
+@media print {
+    @page {
+        size: A4;
+        margin: 15mm;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 8pt;
+        line-height: 1.1;
+        color: black;
+        background: white;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    form.charsheet,
+    form.spellsheet {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Pulsante di stampa */
+.print-controls {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+}
+
+.print-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.print-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.print-button:active {
+    transform: translateY(0);
+}
+
+/* Stili generali */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.2;
+    margin: 0;
+    padding: 10mm;
+    box-sizing: border-box;
+}
+
+.red { background: red; }
+.blue { background: blue; }
+.hide { display: none !important; }
+
+/* Form della scheda personaggio */
+form.charsheet {
+    width: 100%;
+    max-width: 190mm; /* Larghezza A4 meno margini */
+    margin: 0 auto;
+    font-size: 8pt;
+}
+
+/* Header ottimizzato - 4 elementi in 2 righe */
+form.charsheet header {
+    display: flex;
+    margin-bottom: 8mm;
+}
+
+form.charsheet header section.charname {
+    border: 1px solid black;
+    border-right: 0;
+    border-radius: 8px 0 0 8px;
+    padding: 3mm 0;
+    background-color: #f0f0f0;
+    width: 30%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+form.charsheet header section.charname .char-value {
+    padding: 2mm;
+    font-weight: bold;
+    font-size: 12pt;
+    text-align: center;
+    border: 0;
+}
+
+form.charsheet header section.charname label {
+    padding: 0 2mm 1mm 2mm;
+    font-size: 7pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+form.charsheet header section.misc {
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 2mm;
+}
+
+form.charsheet header section.misc ul {
+    margin: 0;
+    padding: 2mm 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1mm;
+    list-style: none;
+}
+
+form.charsheet header section.misc ul li {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 1mm;
+}
+
+form.charsheet header section.misc ul li label {
+    margin-bottom: 1mm;
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+form.charsheet header section.misc ul li .char-value {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 1mm;
+    font-size: 8pt;
+}
+
+/* Main content */
+form.charsheet main {
+    display: flex;
+    justify-content: space-between;
+    gap: 3mm;
+}
+
+form.charsheet main > section {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+}
+
+/* Sezione caratteristiche */
+form.charsheet main section.attributes {
+    display: flex;
+    gap: 2mm;
+}
+
+form.charsheet main section.attributes div.scores {
+    width: 20mm;
+    background-color: #ddd;
+    border-radius: 8px;
+    padding: 1mm;
+}
+
+form.charsheet main section.attributes div.scores ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+form.charsheet main section.attributes div.scores ul li {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    text-align: center;
+    padding: 1mm;
+    display: flex;
+    flex-direction: column;
+}
+
+form.charsheet main section.attributes div.scores ul li label {
+    font-size: 5pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1mm;
+}
+
+form.charsheet main section.attributes div.scores ul li .ability-value {
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 1mm 0;
+    border: 0;
+}
+
+form.charsheet main section.attributes div.scores ul li div.modifier {
+    margin-top: 1mm;
+}
+
+form.charsheet main section.attributes div.scores ul li .modifier-value {
+    background: white;
+    width: 8mm;
+    height: 5mm;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+    line-height: 5mm;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+/* Applicazioni delle caratteristiche */
+form.charsheet main section.attributes div.attr-applications {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+}
+
+.box {
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+}
+
+.inspiration.box, .proficiencybonus.box {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+}
+
+.label-container {
+    flex: 1;
+}
+
+.label-container label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.checkbox-display {
+    width: 4mm;
+    height: 4mm;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.checkbox-display.checked {
+    background-color: black;
+}
+
+.bonus-value, .passive-value {
+    width: 8mm;
+    height: 6mm;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 6mm;
+    font-weight: bold;
+    background: white;
+    display: inline-block;
+}
+
+/* Liste (tiri salvezza e abilità) */
+.list-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-section ul li {
+    display: flex;
+    align-items: center;
+    gap: 1mm;
+    margin-bottom: 0.5mm;
+}
+
+.list-section ul li label {
+    flex: 1;
+    font-size: 6pt;
+    text-transform: capitalize;
+}
+
+.list-section ul li .skill {
+    color: #888;
+    font-style: italic;
+}
+
+.save-value, .skill-value {
+    width: 6mm;
+    text-align: center;
+    border-bottom: 1px solid black;
+    font-size: 7pt;
+    order: 2;
+}
+
+.list-section ul li .checkbox-display {
+    width: 3mm;
+    height: 3mm;
+    order: 1;
+}
+
+.list-section .label {
+    text-align: center;
+    font-size: 7pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 2mm;
+    border-top: 1px solid #ccc;
+    padding-top: 1mm;
+}
+
+/* Sezione combattimento */
+section.combat {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 2mm;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm;
+}
+
+.armorclass, .initiative, .speed {
+    flex: 1;
+    min-width: 15mm;
+    text-align: center;
+}
+
+.combat-value {
+    width: 15mm;
+    height: 15mm;
+    border: 1px solid black;
+    border-radius: 6px;
+    background: white;
+    font-size: 14pt;
+    font-weight: bold;
+    line-height: 15mm;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 1mm;
+}
+
+.armorclass label, .initiative label, .speed label {
+    font-size: 5pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+}
+
+/* HP section */
+.hp {
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+}
+
+.hp .regular {
+    display: flex;
+    gap: 2mm;
+    margin-bottom: 2mm;
+}
+
+.hp .max, .hp .current {
+    flex: 1;
+    text-align: center;
+}
+
+.hp-value, .hp-current-value, .temp-hp-value {
+    background: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2mm;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12pt;
+    min-height: 8mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1mm;
+}
+
+.hp label {
+    font-size: 5pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Hit dice */
+.hitdice {
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+}
+
+.hitdice .total, .hitdice .remaining {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2mm;
+}
+
+.dice-value, .dice-remaining-value {
+    background: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1mm;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1mm;
+    min-width: 20mm;
+}
+
+.hitdice label {
+    font-size: 5pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Death saves */
+.deathsaves {
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+}
+
+.deathsaves .label label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin-bottom: 2mm;
+}
+
+.deathsaves .marks {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+}
+
+.deathsuccesses, .deathfails {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+}
+
+.deathsuccesses label, .deathfails label {
+    font-size: 6pt;
+    min-width: 20mm;
+    font-weight: bold;
+}
+
+.bubble {
+    width: 3mm;
+    height: 3mm;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 0.5mm;
+}
+
+.bubble.filled {
+    background-color: black;
+}
+
+.bubbles {
+    display: flex;
+    gap: 0.5mm;
+}
+
+/* Attacchi */
+.attacksandspellcasting {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+    min-height: 40mm;
+}
+
+.attacksandspellcasting label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2mm;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1mm;
+}
+
+.attacks-content {
+    font-size: 7pt;
+}
+
+.attack-line {
+    display: flex;
+    gap: 2mm;
+    margin-bottom: 1mm;
+    padding: 1mm;
+    border-bottom: 1px solid #eee;
+}
+
+.attack-name {
+    flex: 2;
+    font-weight: bold;
+}
+
+.attack-bonus, .attack-damage {
+    flex: 1;
+}
+
+/* Equipaggiamento */
+.equipment {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+    min-height: 50mm;
+}
+
+.equipment label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2mm;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1mm;
+}
+
+.equipment-content {
+    font-size: 7pt;
+    line-height: 1.3;
+}
+
+.equipment-item {
+    margin-bottom: 0.5mm;
+}
+
+/* Sezione personalità */
+.fluff {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+}
+
+.personality, .ideals, .bonds, .flaws {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    min-height: 20mm;
+}
+
+.personality-content, .ideals-content, .bonds-content, .flaws-content {
+    font-size: 7pt;
+    line-height: 1.3;
+    margin-bottom: 2mm;
+}
+
+.fluff label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding-top: 1mm;
+}
+
+/* Features */
+.features {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+    min-height: 60mm;
+}
+
+.features label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2mm;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1mm;
+}
+
+.features-content {
+    font-size: 7pt;
+    line-height: 1.3;
+}
+
+.feature {
+    margin-bottom: 2mm;
+    padding-bottom: 1mm;
+    border-bottom: 1px solid #eee;
+}
+
+/* Altre competenze */
+.otherprofs {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 2mm;
+    margin: 2mm 0;
+    min-height: 25mm;
+}
+
+.otherprofs label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding-top: 1mm;
+    margin-top: 2mm;
+}
+
+.proficiencies-content {
+    font-size: 7pt;
+    line-height: 1.3;
+}
+
+/* Stili per la scheda degli incantesimi */
+.spellsheet {
+    width: 100%;
+    max-width: 190mm;
+    margin: 0 auto;
+    font-size: 8pt;
+    font-family: Arial, sans-serif;
+}
+
+.spellcaster-info {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 3mm;
+    margin-bottom: 5mm;
+    background-color: #f0f0f0;
+}
+
+.spellcaster-info h1 {
+    text-align: center;
+    margin: 0 0 3mm 0;
+    font-size: 14pt;
+}
+
+.spell-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 2mm;
+}
+
+.spell-stat {
+    text-align: center;
+    flex: 1;
+}
+
+.spell-stat label {
+    display: block;
+    font-size: 6pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 1mm;
+}
+
+.spell-value {
+    background: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2mm;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.spell-level-section {
+    margin-bottom: 4mm;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 2mm;
+    break-inside: avoid;
+}
+
+.spell-level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2mm;
+    padding-bottom: 1mm;
+    border-bottom: 1px solid #ddd;
+}
+
+.spell-level-header h2 {
+    margin: 0;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+.spell-slots {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+}
+
+.spell-slots label {
+    font-size: 7pt;
+    font-weight: bold;
+}
+
+.slots-container {
+    display: flex;
+    gap: 1mm;
+}
+
+.slot-circle {
+    width: 4mm;
+    height: 4mm;
+    border: 1px solid black;
+    border-radius: 50%;
+    background: white;
+}
+
+.slot-circle.used {
+    background: black;
+}
+
+.spell-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1mm;
+}
+
+.spell-item {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2mm;
+    break-inside: avoid;
+}
+
+.spell-header {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    margin-bottom: 1mm;
+}
+
+.spell-checkbox {
+    width: 3mm;
+    height: 3mm;
+    border: 1px solid black;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.spell-checkbox.checked {
+    background-color: black;
+}
+
+.spell-name {
+    font-weight: bold;
+    font-size: 8pt;
+    flex: 1;
+}
+
+.spell-description {
+    font-size: 7pt;
+    color: #333;
+    font-style: italic;
+    margin-left: 5mm;
+    line-height: 1.3;
+}
+
+.spell-description-blank {
+    height: 4mm;
+    border-bottom: 1px solid #ccc;
+    margin-left: 5mm;
+}
+
+.cantrips-section .spell-item {
+    background: #f9f9f9;
+}
+
+.spell-info-section {
+    margin-top: 5mm;
+    border: 1px solid #999;
+    border-radius: 6px;
+    padding: 3mm;
+    background-color: #f5f5f5;
+}
+
+.spell-info-section h3 {
+    margin: 0 0 2mm 0;
+    font-size: 9pt;
+}
+
+.spell-info-section p {
+    margin: 1mm 0;
+    font-size: 7pt;
+}
+
+@media print {
+    .spellsheet {
+        max-width: none;
+        margin: 0;
+    }
+
+    .spell-level-section {
+        break-inside: avoid;
+    }
+
+    .spell-item {
+        break-inside: avoid;
+    }
+}
