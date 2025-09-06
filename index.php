@@ -14,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Decodifica il JSON
-    $characterData = json_decode($jsonData, true);
+    $characterData = json_decode($jsonData, true, 512, JSON_THROW_ON_ERROR);
 
     // Verifica errori nella decodifica
     if (json_last_error() !== JSON_ERROR_NONE) {
         header('Content-Type: application/json');
-        echo json_encode(['error' => 'JSON non valido: ' . json_last_error_msg()]);
+        echo json_encode(['error' => 'JSON non valido: ' . json_last_error_msg()], JSON_THROW_ON_ERROR);
         exit;
     }
 

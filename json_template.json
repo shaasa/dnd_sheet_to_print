@@ -1,0 +1,119 @@
+{
+  "name": "Lior",
+  "class": "Chierico",
+  "level": 1,
+  "race": "Elfo del Sole",
+  "background": "Accolito",
+  "alignment": "Neutrale Buono",
+  "abilityScores": {
+    "strength": 10,
+    "dexterity": 14,
+    "constitution": 12,
+    "intelligence": 11,
+    "wisdom": 16,
+    "charisma": 13
+  },
+  "hp": {
+    "max": 9,
+    "current": 9,
+    "temporary": 0
+  },
+  "armorClass": 17,
+  "speed": 30,
+  "initiative": 2,
+  "proficiencyBonus": 2,
+  "inspiration": false,
+  "savingThrows": [
+    "saggezza",
+    "carisma"
+  ],
+  "skills": [
+    "intuizione",
+    "religione",
+    "medicina"
+  ],
+  "languages": [
+    "Comune",
+    "Elfico",
+    "Celestiale"
+  ],
+  "proficiencies": [
+    "Armature leggere",
+    "Armature medie",
+    "Scudi",
+    "Armi semplici"
+  ],
+  "equipment": [
+    "Mazza",
+    "Scudo",
+    "Armatura a scaglie",
+    "Simbolo sacro",
+    "Kit da sacerdote",
+    "Abiti comuni",
+    "10 monete d'oro"
+  ],
+  "attacks": [
+    {
+      "name": "Mazza",
+      "bonus": "+2",
+      "damage": "1d6+0 contundente"
+    }
+  ],
+  "features": [
+    {
+      "name": "Dominio della Vita",
+      "description": "Aggiungi +2 + livello incantesimo a ogni incantesimo di cura."
+    },
+    {
+      "name": "Incantesimi del Dominio",
+      "description": "Benedizione, Cura Ferite sono sempre preparati."
+    }
+  ],
+  "personality": {
+    "traits": "Parlo con calma anche nelle situazioni più difficili.",
+    "ideals": "Carità. Aiutare chi ha bisogno è il mio dovere sacro.",
+    "bonds": "Il tempio dove ho imparato tutto è la mia vera casa.",
+    "flaws": "Mi fido troppo facilmente delle persone."
+  },
+  "hitDie": 8,
+  "combatStatus": {
+    "hitDiceUsed": 0,
+    "deathSaves": {
+      "successes": 0,
+      "failures": 0
+    }
+  },
+  "isSpellcaster": true,
+  "spellcasting": {
+    "class": "Chierico",
+    "ability": "wisdom",
+    "slots": {
+      "1": 2
+    },
+    "slotsUsed": {
+      "1": 0
+    },
+    "cantrips": [
+      "Luce",
+      "Tocco Gelido",
+      "Taumaturgia"
+    ],
+    "cantripDetails": {
+      "Luce": "Un oggetto brilla di luce per 1 ora.",
+      "Tocco Gelido": "Infligge 1d8 danni necrotici e impedisce di curarsi per 1 turno.",
+      "Taumaturgia": "Crea piccoli effetti magici come voce tonante o finestre che sbattono."
+    },
+    "level1": [
+      "Cura Ferite",
+      "Benedizione"
+    ],
+    "level1Details": {
+      "Cura Ferite": "Cura 1d8 + modificatore Saggezza. Tocco.",
+      "Benedizione": "Tre creature aggiungono 1d4 ai tiri per colpire e salvezza. Concentrazione."
+    },
+    "prepared": [
+      "Cura Ferite",
+      "Benedizione"
+    ]
+  }
+}
