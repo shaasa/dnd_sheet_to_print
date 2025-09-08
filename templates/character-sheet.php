@@ -183,8 +183,10 @@ function isSavingThrowProficient($ability, $characterSaves, $abilityMapping): bo
 
 <!-- Pulsante di stampa (nascosto quando si stampa) -->
 <div class="print-controls no-print">
+    <a href="index.php" class="home-button">🏠 Torna alla Home</a>
     <button onclick="window.print()" class="print-button">🖨️ Stampa Scheda</button>
 </div>
+
 
 <form class="charsheet">
     <header>
