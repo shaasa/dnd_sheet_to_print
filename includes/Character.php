@@ -1,47 +1,57 @@
-
 <?php
 // includes/character.php - Gestisce i dati del personaggio
 
-class Character {
+class Character
+{
     private $data;
 
-    public function __construct($data) {
+    public function __construct($data)
+    {
         $this->data = $data;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->data['name'] ?? 'Sconosciuto';
     }
 
-    public function getClass() {
+    public function getClass()
+    {
         return $this->data['class'] ?? 'Sconosciuto';
     }
 
-    public function getLevel() {
+    public function getLevel()
+    {
         return $this->data['level'] ?? 1;
     }
 
-    public function getRace() {
+    public function getRace()
+    {
         return $this->data['race'] ?? 'Sconosciuto';
     }
 
-    public function getBackground() {
+    public function getBackground()
+    {
         return $this->data['background'] ?? 'Sconosciuto';
     }
 
-    public function getAlignment() {
+    public function getAlignment()
+    {
         return $this->data['alignment'] ?? 'Neutrale';
     }
 
-    public function getPlayerName() {
+    public function getPlayerName()
+    {
         return $this->data['playerName'] ?? '';
     }
 
-    public function getExperiencePoints() {
+    public function getExperiencePoints()
+    {
         return $this->data['experiencePoints'] ?? 0;
     }
 
-    public function getAbilityScores() {
+    public function getAbilityScores()
+    {
         return $this->data['abilityScores'] ?? [
             'strength' => 10,
             'dexterity' => 10,
@@ -52,37 +62,45 @@ class Character {
         ];
     }
 
-    public function getAbilityModifier($ability) {
+    public function getAbilityModifier($ability)
+    {
         $scores = $this->getAbilityScores();
         $score = $scores[$ability] ?? 10;
         return floor(($score - 10) / 2);
     }
 
-    public function getProficiencyBonus() {
+    public function getProficiencyBonus()
+    {
         return $this->data['proficiencyBonus'] ?? (ceil($this->getLevel() / 4) + 1);
     }
 
-    public function hasInspiration() {
+    public function hasInspiration()
+    {
         return $this->data['inspiration'] ?? false;
     }
 
-    public function getSavingThrows() {
+    public function getSavingThrows()
+    {
         return $this->data['savingThrows'] ?? [];
     }
 
-    public function getSkills() {
+    public function getSkills()
+    {
         return $this->data['skills'] ?? [];
     }
 
-    public function getLanguages() {
+    public function getLanguages()
+    {
         return $this->data['languages'] ?? [];
     }
 
-    public function getProficiencies() {
+    public function getProficiencies()
+    {
         return $this->data['proficiencies'] ?? [];
     }
 
-    public function getHP() {
+    public function getHP()
+    {
         return [
             'max' => $this->data['hp']['max'] ?? 0,
             'current' => $this->data['hp']['current'] ?? ($this->data['hp']['max'] ?? 0),
@@ -90,19 +108,23 @@ class Character {
         ];
     }
 
-    public function getArmorClass() {
+    public function getArmorClass()
+    {
         return $this->data['armorClass'] ?? 10;
     }
 
-    public function getInitiative() {
+    public function getInitiative()
+    {
         return $this->data['initiative'] ?? $this->getAbilityModifier('dexterity');
     }
 
-    public function getSpeed() {
+    public function getSpeed()
+    {
         return $this->data['speed'] ?? 30;
     }
 
-    public function getHitDie() {
+    public function getHitDie()
+    {
         if (isset($this->data['hitDie'])) {
             return $this->data['hitDie'];
         }
@@ -125,30 +147,57 @@ class Character {
         return $hitDiceByClass[$class] ?? 8;
     }
 
-    public function getHitDiceUsed() {
+    public function getHitDiceUsed()
+    {
         return $this->data['combatStatus']['hitDiceUsed'] ?? 0;
     }
 
-    public function getDeathSaves() {
+    public function getDeathSaves()
+    {
         return [
             'successes' => $this->data['combatStatus']['deathSaves']['successes'] ?? 0,
             'failures' => $this->data['combatStatus']['deathSaves']['failures'] ?? 0
         ];
     }
 
-    public function getAttacks() {
+    public function getAttacks()
+    {
         return $this->data['attacks'] ?? [];
     }
 
-    public function getEquipment() {
+    public function getEquipment()
+    {
         return $this->data['equipment'] ?? [];
     }
 
-    public function getFeatures() {
-        return $this->data['features'] ?? [];
+    public function getFeatures(): array
+    {
+        $features = $this->data['features'] ?? [];
+
+        // Normalizza le features per assicurarsi che siano sempre array con name e description
+        $normalizedFeatures = [];
+        foreach ($features as $feature) {
+            if (is_string($feature)) {
+                // Se la feature è una stringa, crea un array con name e description
+                $normalizedFeatures[] = [
+                    'name' => $feature,
+                    'description' => ''
+                ];
+            } elseif (is_array($feature)) {
+                // Se è già un array, assicurati che abbia le chiavi necessarie
+                $normalizedFeatures[] = [
+                    'name' => $feature['name'] ?? 'Feature sconosciuta',
+                    'description' => $feature['description'] ?? ''
+                ];
+            }
+        }
+
+        return $normalizedFeatures;
     }
 
-    public function getPersonality() {
+
+    public function getPersonality()
+    {
         return [
             'traits' => $this->data['personality']['traits'] ?? '',
             'ideals' => $this->data['personality']['ideals'] ?? '',
@@ -157,12 +206,51 @@ class Character {
         ];
     }
 
-    public function isSpellcaster() {
-        return (isset($this->data['spellcasting']) && !empty($this->data['spellcasting'])) ||
-            (isset($this->data['isSpellcaster']) && $this->data['isSpellcaster'] === true);
+    public function isSpellcaster(): bool
+    {
+        // Prima controlla il flag esplicito
+        if (isset($this->data['isSpellcaster'])) {
+            return $this->data['isSpellcaster'] === true;
+        }
+
+        // Se non c'è il flag, controlla se ha incantesimi effettivi
+        if (isset($this->data['spellcasting'])) {
+            $spellcasting = $this->data['spellcasting'];
+
+            // Controlla se ha una classe di incantatore specificata e non vuota
+            if (!empty($spellcasting['class'])) {
+                return true;
+            }
+
+            // Controlla se ha trucchetti
+            if (!empty($spellcasting['cantrips'])) {
+                return true;
+            }
+
+            // Controlla se ha slot incantesimi
+            if (!empty($spellcasting['slots'])) {
+                return true;
+            }
+
+            // Controlla se ha incantesimi di qualsiasi livello
+            for ($i = 1; $i <= 9; $i++) {
+                if (!empty($spellcasting['level' . $i])) {
+                    return true;
+                }
+            }
+
+            // Controlla se ha incantesimi preparati
+            if (!empty($spellcasting['prepared'])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public function getFullData() {
+
+    public function getFullData()
+    {
         return $this->data;
     }
 }

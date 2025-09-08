@@ -119,7 +119,8 @@ $skills = [
 ];
 
 // Funzione per verificare se una skill è competente (supporta italiano e inglese)
-function isSkillProficient($skill, $characterSkills, $skillMapping) {
+function isSkillProficient($skill, $characterSkills, $skillMapping): bool
+{
     $normalizedSkill = strtolower($skill);
 
     foreach ($characterSkills as $charSkill) {
@@ -149,7 +150,8 @@ function isSkillProficient($skill, $characterSkills, $skillMapping) {
 }
 
 // Funzione per verificare se un tiro salvezza è competente (supporta italiano e inglese)
-function isSavingThrowProficient($ability, $characterSaves, $abilityMapping) {
+function isSavingThrowProficient($ability, $characterSaves, $abilityMapping): bool
+{
     $normalizedAbility = strtolower($ability);
 
     foreach ($characterSaves as $charSave) {

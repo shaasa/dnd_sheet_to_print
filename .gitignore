@@ -1,0 +1,10 @@
+# Environment variables
+.env
+
+# Database files
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ... resto esistente ...
