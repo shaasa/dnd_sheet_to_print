@@ -1,7 +1,7 @@
 <!-- Form per l'inserimento dei dati JSON del personaggio -->
 <div class="container">
     <div class="form-header">
-        <h1>Generatore Schede D&D 5e</h1>
+        <h1>Generatore Schede D&D 5e 2014</h1>
         <p class="subtitle">Crea schede personaggio professionali pronte per la stampa</p>
     </div>
 
@@ -16,7 +16,7 @@
                 <button class="copy-btn" onclick="copyPrompt()" title="Copia prompt">📋 Copia</button>
             </div>
             <div class="prompt-box" id="chatgpt-prompt">
-                <pre>Crea un JSON per un personaggio D&D 5e seguendo esattamente questa struttura. Compila tutti i campi con dati appropriati per un personaggio [DESCRIVI QUI IL TUO PERSONAGGIO - es: "Guerriero Umano di livello 3, veterano di guerra con personalità stoica"].
+                <pre>Crea un JSON per un personaggio D&D 5e 2014 seguendo esattamente questa struttura. Compila tutti i campi con dati appropriati per un personaggio [DESCRIVI QUI IL TUO PERSONAGGIO - es: "Guerriero Umano di livello 3, veterano di guerra con personalità stoica"].
 
 Usa questa struttura JSON esatta (sostituisci solo i valori, mantieni tutti i nomi dei campi identici):
 
@@ -83,7 +83,7 @@ Usa questa struttura JSON esatta (sostituisci solo i valori, mantieni tutti i no
 IMPORTANTE:
 - Se è un incantatore, imposta "isSpellcaster": true e compila la sezione spellcasting
 - Usa nomi italiani per skills e saving throws (es: "forza", "saggezza", "atletica", "furtività")
-- Calcola correttamente modificatori, CA, HP e bonus in base alle regole D&D 5e
+- Calcola correttamente modificatori, CA, HP e bonus in base alle regole D&D 5e 2014
 - Assegna equipment appropriato per classe e background
 - Crea attacks realistici con bonus e danni corretti
 - Scrivi personality in italiano con dettagli interessanti</pre>

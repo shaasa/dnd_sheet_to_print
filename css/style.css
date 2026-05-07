@@ -5,6 +5,9 @@
  * Adapted and extended for Schedadnd project
  */
 
+a { color: #a0b0f0; }
+a:hover { color: #ffffff; text-decoration: underline; }
+
 /* CSS ottimizzato per stampa A4 con traduzioni italiane */
 
 @media print {

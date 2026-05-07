@@ -1,8 +1,15 @@
+<?php
+require_once __DIR__ . '/../includes/ModelCacheService.php';
+require_once __DIR__ . '/../includes/EnvLoader.php';
+EnvLoader::load();
+$availableModels  = ModelCacheService::getModels();
+$defaultModel     = $_ENV['OPENROUTER_MODEL'] ?? 'google/gemini-2.0-flash-exp:free';
+?>
 <!-- Form unificato con selezione del metodo di generazione -->
 <link rel="stylesheet" href="css/form.css">
 <div class="container">
     <div class="form-header">
-        <h1>Generatore Schede D&D 5e</h1>
+        <h1>Generatore Schede D&D 5e 2014</h1>
         <p class="subtitle">Crea schede personaggio professionali pronte per la stampa</p>
     </div>
 
@@ -19,7 +26,7 @@
                 <ul class="features-list">
                     <li>Veloce e semplice</li>
                     <li>Completamente gratuito</li>
-                    <li>Alimentato da Google Gemini</li>
+                    <li>Alimentato da OpenRouter</li>
                 </ul>
                 <button type="button" class="select-method-btn ai-btn">
                     🚀 Usa Generazione AI
@@ -45,7 +52,7 @@
     <!-- Sezione AI (nascosta inizialmente) -->
     <div id="ai-section" class="generation-section" style="display: none;">
         <div class="section-header">
-            <h2>Generazione Automatica con AI</h2>
+            <h2>Generazione della Scheda</h2>
             <button class="back-btn" onclick="showMethodSelection()">← Torna alla Selezione</button>
         </div>
 
@@ -54,6 +61,44 @@
                 completo:</p>
 
             <form method="POST" action="generate_with_ai.php" id="ai-form">
+                <div class="form-group">
+                    <label for="ai_model">
+                        <strong>Modello AI:</strong>
+                        <small>Tutti i modelli disponibili sono gratuiti</small>
+                    </label>
+                    <small class="model-legend">✦ consigliato per generazione schede D&D</small>
+                    <select name="ai_model" id="ai_model">
+                        <?php foreach ($availableModels as $model): ?>
+                            <option value="<?= htmlspecialchars($model['id']) ?>"
+                                <?= $model['id'] === $defaultModel ? 'selected' : '' ?>>
+                                <?= ($model['recommended'] ?? false) ? '✦ ' : '' ?><?= htmlspecialchars($model['name']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="score_method">
+                        <strong>Metodo di assegnazione caratteristiche:</strong>
+                        <span class="info-tooltip">
+                            <i class="fa-solid fa-circle-info info-icon"></i>
+                            <span class="tooltip-content">
+                                <strong>Standard Array</strong>
+                                <p>Assegni liberamente i sei valori fissi 15, 14, 13, 12, 10, 8 alle caratteristiche. Ogni valore va usato una sola volta. Metodo semplice e bilanciato, ideale per chi vuole un personaggio solido senza affidarsi alla fortuna.</p>
+                                <strong>Point Buy</strong>
+                                <p>Tutte le caratteristiche partono da 8 e hai 27 punti da spendere. Il costo aumenta in modo non lineare: arrivare a 14 costa 7 punti, a 15 ne costa 9. Nessun valore può superare 15 prima dei bonus razziali. Metodo che garantisce il massimo controllo sulla build.</p>
+                                <strong>Lancio Dadi (4d6)</strong>
+                                <p>Per ogni caratteristica si lanciano 4d6 e si scarta il dado più basso, ripetendo sei volte. I valori possono variare da 3 a 18 e non saranno mai perfettamente bilanciati. Metodo più imprevedibile: può produrre personaggi eccezionali o mediocri.</p>
+                            </span>
+                        </span>
+                    </label>
+                    <select name="score_method" id="score_method">
+                        <option value="standard_array">Standard Array (15, 14, 13, 12, 10, 8)</option>
+                        <option value="point_buy">Point Buy (27 punti, max 15 per caratteristica)</option>
+                        <option value="rolled">Lancio dadi (4d6, scarta il dado più basso)</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="character_description">
                         <strong>Descrizione del Personaggio:</strong>
@@ -98,7 +143,7 @@
             </form>
 
             <div class="ai-info">
-                <small>Servizio gratuito alimentato da Google Gemini</small>
+                <small>Generazione AI gratuita via <a href="https://openrouter.ai" target="_blank" rel="noopener">OpenRouter</a></small>
             </div>
         </div>
     </div>
@@ -151,7 +196,7 @@
                     <button class="copy-btn" onclick="copyPrompt()" title="Copia prompt">📋 Copia Prompt</button>
                 </div>
                 <div class="prompt-box" id="chatgpt-prompt">
-                    <pre>Crea un JSON per un personaggio D&D 5e seguendo esattamente questa struttura. Compila tutti i campi con dati appropriati per un personaggio [DESCRIVI QUI IL TUO PERSONAGGIO - es: "Guerriero Umano di livello 3, veterano di guerra con personalità stoica"].
+                    <pre>Crea un JSON per un personaggio D&D 5e 2014 seguendo esattamente questa struttura. Compila tutti i campi con dati appropriati per un personaggio [DESCRIVI QUI IL TUO PERSONAGGIO - es: "Guerriero Umano di livello 3, veterano di guerra con personalità stoica"].
 
 Usa questa struttura JSON esatta (sostituisci solo i valori, mantieni tutti i nomi dei campi identici):
 
@@ -218,7 +263,7 @@ Usa questa struttura JSON esatta (sostituisci solo i valori, mantieni tutti i no
 IMPORTANTE:
 - Se è un incantatore, imposta "isSpellcaster": true e compila la sezione spellcasting
 - Usa nomi italiani per skills e saving throws (es: "forza", "saggezza", "atletica", "furtività")
-- Calcola correttamente modificatori, CA, HP e bonus in base alle regole D&D 5e
+- Calcola correttamente modificatori, CA, HP e bonus in base alle regole D&D 5e 2014
 - Assegna equipment appropriato per classe e background
 - Crea attacks realistici con bonus e danni corretti
 - Scrivi personality in italiano con dettagli interessanti</pre>
@@ -236,41 +281,36 @@ IMPORTANTE:
                 </ol>
             </div>
 
-            <!-- resto del form rimane uguale -->
             <form method="POST" action="index.php">
-                <!-- ... resto invariato ... -->
+                <div class="form-group">
+                    <label for="json_data">
+                        <strong>JSON del Personaggio:</strong>
+                        <small>Incolla qui il JSON generato</small>
+                    </label>
+                    <textarea
+                            name="json_data"
+                            id="json_data"
+                            rows="20"
+                            placeholder="Incolla qui il JSON del tuo personaggio..."
+                            required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="loadExample()">
+                        📄 Carica Esempio
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="validateJSON()">
+                        ✅ Valida JSON
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        🖨️ Genera Scheda
+                    </button>
+                </div>
+
+                <div id="json-validation" class="validation-message"></div>
             </form>
         </div>
     </div>
-    <form method="POST" action="index.php">
-        <div class="form-group">
-            <label for="json_data">
-                <strong>JSON del Personaggio:</strong>
-                <small>Incolla qui il JSON generato da ChatGPT</small>
-            </label>
-            <textarea
-                    name="json_data"
-                    id="json_data"
-                    rows="20"
-                    placeholder="Incolla qui il JSON del tuo personaggio..."
-                    required></textarea>
-        </div>
-
-        <div class="form-actions">
-            <button type="button" class="btn-secondary" onclick="loadExample()">
-                📄 Carica Esempio
-            </button>
-            <button type="button" class="btn-secondary" onclick="validateJSON()">
-                ✅ Valida JSON
-            </button>
-            <button type="submit" class="btn-primary">
-                🖨️ Genera Scheda
-            </button>
-        </div>
-
-        <div id="json-validation" class="validation-message"></div>
-    </form>
-</div>
 </div>
 
 <!-- Template Section -->
