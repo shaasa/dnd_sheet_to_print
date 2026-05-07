@@ -57,8 +57,7 @@ $defaultModel     = $_ENV['OPENROUTER_MODEL'] ?? 'google/gemini-2.0-flash-exp:fr
         </div>
 
         <div class="ai-form-container">
-            <p>Descrivi il tuo personaggio in dettaglio e l'intelligenza artificiale creerà automaticamente il JSON
-                completo:</p>
+            <p>Descrivi il tuo personaggio in dettaglio e l'intelligenza artificiale creerà automaticamente la scheda completa pronta per la stampa:</p>
 
             <form method="POST" action="generate_with_ai.php" id="ai-form">
                 <div class="form-group">
