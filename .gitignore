@@ -7,4 +7,7 @@ data/
 *.sqlite
 *.sqlite3
 
+# IDE
+.idea/
+
 # ... resto esistente ...

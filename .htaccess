@@ -1,0 +1,33 @@
+# =====================================================================
+# Protezione file sensibili — NON rimuovere.
+# Impedisce l'accesso web a .env, .git, cache, config e dotfile.
+# (la chiave OpenRouter sta in .env: senza questo blocco è scaricabile)
+# =====================================================================
+
+# Blocca tutti i dotfile (.env, .env_example, .gitignore, .htaccess stesso, ecc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Blocca per estensione/nome file sensibili anche se rinominati
+<FilesMatch "(?i)(^\.env|\.env\..*|\.env_example|composer\.(json|lock)|\.git.*|\.idea.*|.*\.(sqlite3?|db|log)|models_cache\.json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Blocca l'accesso diretto alle cartelle interne (sorgenti PHP e dati)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(\.git|\.idea|includes|config|data|admin)(/|$) - [F,L]
+</IfModule>

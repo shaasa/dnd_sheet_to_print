@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require_once 'includes/OpenRouterService.php';
+require_once 'includes/ModelCacheService.php';
 require_once 'includes/Character.php';
 require_once 'includes/Spellcaster.php';
 require_once 'includes/Renderer.php';
@@ -20,6 +21,17 @@ try {
     $description = trim($_POST['character_description'] ?? '');
     $modelChoice = trim($_POST['ai_model'] ?? '');
     $scoreMethod = trim($_POST['score_method'] ?? 'standard_array');
+
+    // SICUREZZA: la tendina lato client mostra solo modelli gratuiti, ma è
+    // cosmetica. Senza questo controllo chiunque può fare una POST con un
+    // modello a pagamento (es. anthropic/claude-*) e farlo addebitare sulla
+    // nostra chiave OpenRouter. Accettiamo SOLO id presenti nella lista dei
+    // modelli free verificati; qualsiasi altro valore viene ignorato e si usa
+    // il default (free) configurato in .env.
+    $allowedModelIds = array_column(ModelCacheService::getModels(), 'id');
+    if ($modelChoice === '' || !in_array($modelChoice, $allowedModelIds, true)) {
+        $modelChoice = null;
+    }
 
     if (empty($description)) {
         throw new Exception('La descrizione del personaggio è obbligatoria');
